@@ -1,28 +1,37 @@
 import React from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, Platform, Button } from 'react-native'
 import { useState, useEffect } from 'react'
 
+import DateTimePicker from '@react-native-community/datetimepicker';
+
+
 export default function HomeScreen({ name = "Clown" }) {
+  const [date, setDate] = useState(new Date())
+  const [mode, setmode] = useState(mode)
+  const [show, setshow] = useState(false)
+  const [text, settext] = useState('Empty')
+  const [diff, setdiff] = useState(null)
 
-  /* const [seconds, setSeconds] = useState(0)
-  const [minutes, setMinutes] = useState(0)
-  const [hours, setHours] = useState(0)
-  const [days, setDays] = useState(0)
-  const [timeOn, setTimeOn] = useState(false) */
 
-  /* useEffect(() => {
-    let interval = null;
-    
-    if(timeOn){
-      interval = setInterval(() => {
-        setSeconds(prevTime => prevTime+10)
-      }, 10000)
-    }else{
-      clearInterval(interval)
-    }
-    return () => clearInterval(interval)
+  
+  const onChange = (e, selectedDate) => {
+    const currentDate = selectedDate || date
+    setshow(Platform === 'ios')
+    setDate(currentDate)
 
-  }, [timeOn]) */
+    let tempDate = new Date(currentDate)
+    let fDate = tempDate.getDate() + (tempDate.getMonth() + 1) + '/' + tempDate.getFullYear()
+    let fTime = 'Hours: ' + tempDate.getHours() + ' | Minutes: ' + tempDate.getMinutes()
+    settext(fDate + '\n' + fTime)
+
+    console.log(fDate)
+    console.log(fTime)
+  }
+
+  const showMode = (currentMode) => {
+    setshow(true)
+    setmode(currentMode)
+  }
   
 
   return (
@@ -36,9 +45,21 @@ export default function HomeScreen({ name = "Clown" }) {
       </View>
       {/* Contador */}
       <View>
-        <Text>{days != 0 ?? days+":"}{hours != 0 ?? hours+":"}{minutes != 0 ?? minutes+":"}{seconds}</Text>
-        <TouchableOpacity onPress={setTimeOn(true)}>
-          <Text>🍖</Text>
+      <Text>{text}</Text>
+      <Button title='Fecha' onPress={() => showMode('date')} />
+      <Button title='Hora' onPress={() => showMode('time')} />
+      {show && (
+        <DateTimePicker
+        testID = 'dateTimePicker'
+        value={date}
+        mode={mode}
+        is24Hour={true}
+        display='default'
+        onChange={onChange}
+        />
+      )}
+        <TouchableOpacity>
+          <Text>He pecado 🍖</Text>
         </TouchableOpacity>
       </View>
     </View>
