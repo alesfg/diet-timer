@@ -9,15 +9,15 @@ import Badge from './Badge'
 
 export default function Badges() {
     const badges = [
-        {name: "Clown", img: clown, time: "0+ Hours"},
-        {name: "Noob", img: noob, time: "24+ Hours"},
-        {name: "Average", img: average, time: "48+ Hours"},
-        {name: "Fitness", img: fitness, time: "100+ Hours"}
+        {name: "Clown", img: clown, time: "0+ Hours",id:1},
+        {name: "Noob", img: noob, time: "24+ Hours",id:2},
+        {name: "Average", img: average, time: "48+ Hours",id:3},
+        {name: "Fitness", img: fitness, time: "100+ Hours",id:4}
     ]
     const [badge, setBadge] = useState(badges[0])
   return (
     <View style={styles.container}>
-        {badges.map(badge => <Badge name={badge.name} img={badge.img} time={badge.time} />)}
+        {badges.map(badge => <Badge name={badge.name} img={badge.img} time={badge.time} key={badge.id} />)}
     </View>
   )
 }
