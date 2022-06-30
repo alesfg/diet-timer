@@ -5,7 +5,7 @@ import ProfilePhoto from "./ProfilePhoto";
 function Profile() {
   return (
     <View style={styles.container}>
-      <ProfilePhoto></ProfilePhoto>
+      <ProfilePhoto />
     </View>
   );
 }
