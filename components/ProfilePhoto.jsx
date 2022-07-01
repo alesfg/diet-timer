@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { View, Image, Text, StyleSheet, TouchableOpacity } from "react-native";
-import average from "../assets/average.jpg";
 import editPencil from "../assets/EditPencil.png";
 import * as ImagePicker from "expo-image-picker";
 
