@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity, Platform, Button } from 'reac
 import { useState, useEffect } from 'react'
 
 
+
 export default function HomeScreen({ name = "Clown" }) {
   const [initialDate, setInitialDate] = useState(null)
   const [diff, setDiff] = useState("00:00:00:00")
@@ -12,29 +13,15 @@ export default function HomeScreen({ name = "Clown" }) {
   const [seconds, setSeconds] = useState()
   let onDiet = initialDate ? true : false
 
-
-
     useEffect(() => {
-      setInterval(() => {
-        if(initialDate){
-          let secondsAux = ((new Date() - initialDate)/(1000)%60)
-          setSeconds(secondsAux)
-          let minutesAux = Math.floor((new Date() - initialDate) / (60000)%60)
-          setMinutes(minutesAux)
-          let hoursAux = Math.floor((new Date() - initialDate) / (60000*60)%24)
-          setHours(hoursAux)
-          let daysAux = Math.floor((new Date() - initialDate) / (86400000))
-          setDays(daysAux)
-
-          Math.floor(secondsAux).toString().length===1 ? secondsAux="0"+Math.floor(secondsAux).toString() : secondsAux=Math.floor(secondsAux).toString()
-          minutesAux.toString().length===1 ? minutesAux="0"+Math.floor(minutesAux).toString() : minutesAux=Math.floor(minutesAux).toString()
-          hoursAux.toString().length===1 ? hoursAux="0"+Math.floor(hoursAux).toString() : hoursAux=Math.floor(hoursAux).toString()
-          daysAux.toString().length===1 ? daysAux="0"+Math.floor(daysAux).toString() : daysAux=Math.floor(daysAux).toString()
-
-          setDiff(daysAux +":"+ hoursAux +":"+ minutesAux +":"+ secondsAux)
-        }
-     }, 1000);
-    }, [onDiet])
+      if(this._interval ){
+        clearInterval(this._interval);
+        crearIntervalo();
+      }else{
+        crearIntervalo();
+      }
+      
+    }, [initialDate])
     
 
   return (
@@ -49,7 +36,7 @@ export default function HomeScreen({ name = "Clown" }) {
       {/* Contador */}
       <View>
       <Text>{diff}</Text>
-        <TouchableOpacity style={styles.button} onPress={() => setInitialDate(new Date())}>
+        <TouchableOpacity style={styles.button} onPress={() => {setInitialDate(new Date()); setDiff("0")}}>
           {initialDate ?
           <Text>He pecado 🍖</Text>
           :
@@ -60,6 +47,30 @@ export default function HomeScreen({ name = "Clown" }) {
       </View>
     </View>
   )
+
+  function crearIntervalo(){
+    this._interval = setInterval(() => {
+      if(initialDate){
+        console.log(initialDate.toLocaleString())
+        let secondsAux = ((new Date() - initialDate)/(1000)%60)
+        setSeconds(secondsAux)
+        let minutesAux = Math.floor((new Date() - initialDate) / (60000)%60)
+        setMinutes(minutesAux)
+        let hoursAux = Math.floor((new Date() - initialDate) / (60000*60)%24)
+        setHours(hoursAux)
+        let daysAux = Math.floor((new Date() - initialDate) / (86400000))
+        setDays(daysAux)
+  
+        Math.floor(secondsAux).toString().length===1 ? secondsAux="0"+Math.floor(secondsAux).toString() : secondsAux=Math.floor(secondsAux).toString()
+        minutesAux.toString().length===1 ? minutesAux="0"+Math.floor(minutesAux).toString() : minutesAux=Math.floor(minutesAux).toString()
+        hoursAux.toString().length===1 ? hoursAux="0"+Math.floor(hoursAux).toString() : hoursAux=Math.floor(hoursAux).toString()
+        daysAux.toString().length===1 ? daysAux="0"+Math.floor(daysAux).toString() : daysAux=Math.floor(daysAux).toString()
+  
+        setDiff(daysAux +":"+ hoursAux +":"+ minutesAux +":"+ secondsAux)
+      }
+   }, 1000);
+  }
+
 }
 
 const styles = StyleSheet.create({
