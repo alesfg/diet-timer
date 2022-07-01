@@ -11,7 +11,6 @@ export default function HomeScreen({ name = "Clown" }) {
   const [hours, setHours] = useState()
   const [minutes, setMinutes] = useState()
   const [seconds, setSeconds] = useState()
-  let onDiet = initialDate ? true : false
 
     useEffect(() => {
       if(this._interval ){
@@ -23,6 +22,10 @@ export default function HomeScreen({ name = "Clown" }) {
       
     }, [initialDate])
     
+    const reset = () => {
+      setInitialDate(new Date())
+      setDiff("00:00:00:00")
+    }
 
   return (
     <View style={styles.container}>
@@ -35,8 +38,8 @@ export default function HomeScreen({ name = "Clown" }) {
       </View>
       {/* Contador */}
       <View>
-      <Text>{diff}</Text>
-        <TouchableOpacity style={styles.button} onPress={() => {setInitialDate(new Date()); setDiff("0")}}>
+      <Text style={styles.digits}>{diff}</Text>
+        <TouchableOpacity style={styles.button} onPress={reset}>
           {initialDate ?
           <Text>He pecado 🍖</Text>
           :
@@ -65,7 +68,7 @@ export default function HomeScreen({ name = "Clown" }) {
         minutesAux.toString().length===1 ? minutesAux="0"+Math.floor(minutesAux).toString() : minutesAux=Math.floor(minutesAux).toString()
         hoursAux.toString().length===1 ? hoursAux="0"+Math.floor(hoursAux).toString() : hoursAux=Math.floor(hoursAux).toString()
         daysAux.toString().length===1 ? daysAux="0"+Math.floor(daysAux).toString() : daysAux=Math.floor(daysAux).toString()
-  
+      
         setDiff(daysAux +":"+ hoursAux +":"+ minutesAux +":"+ secondsAux)
       }
    }, 1000);
@@ -92,5 +95,8 @@ const styles = StyleSheet.create({
       borderRadius: 5,
       padding:10,
       margin:10
+    },
+    digits: {
+      fontSize:50
     }
 })
