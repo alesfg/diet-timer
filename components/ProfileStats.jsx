@@ -10,10 +10,11 @@ const ProfileStats = () => {
       data={statsData}
       renderItem={({ item: stats }) => (
         <View>
-          <Text>{stats.title}</Text>
+          <Text style={{ fontWeight: "bold" }}>{stats.title}</Text>
           <Text>{stats.description}</Text>
         </View>
       )}
+      ItemSeparatorComponent={() => <Text></Text>}
     />
   );
 };
