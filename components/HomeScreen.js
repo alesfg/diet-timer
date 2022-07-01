@@ -6,8 +6,8 @@ import { useState, useEffect } from 'react'
 
 export default function HomeScreen({ name = "Clown" }) {
   const [initialDate, setInitialDate] = useState(null)
-  const [diff, setDiff] = useState("00:00:00:00")
-  const [days, setDays] = useState()
+  const [diff, setDiff] = useState("00:00:00")
+  const [days, setDays] = useState("0")
   const [hours, setHours] = useState()
   const [minutes, setMinutes] = useState()
   const [seconds, setSeconds] = useState()
@@ -24,7 +24,7 @@ export default function HomeScreen({ name = "Clown" }) {
     
     const reset = () => {
       setInitialDate(new Date())
-      setDiff("00:00:00:00")
+      setDiff("00:00:00")
     }
 
   return (
@@ -38,7 +38,14 @@ export default function HomeScreen({ name = "Clown" }) {
       </View>
       {/* Contador */}
       <View>
-      <Text style={styles.digits}>{diff}</Text>
+        <View style={styles.counter}>
+          <View style={{flexDirection:'row'}}>
+          <Text style={styles.digits}>{days}</Text>
+          <Text style={{alignSelf:'flex-end',marginBottom:30}}>{days===1 ? "day" : "days"}</Text>
+          </View>
+
+          <Text>{diff}</Text>
+        </View>
         <TouchableOpacity style={styles.button} onPress={reset}>
           {initialDate ?
           <Text>He pecado 🍖</Text>
@@ -62,14 +69,13 @@ export default function HomeScreen({ name = "Clown" }) {
         let hoursAux = Math.floor((new Date() - initialDate) / (60000*60)%24)
         setHours(hoursAux)
         let daysAux = Math.floor((new Date() - initialDate) / (86400000))
-        setDays(daysAux)
-  
+        
         Math.floor(secondsAux).toString().length===1 ? secondsAux="0"+Math.floor(secondsAux).toString() : secondsAux=Math.floor(secondsAux).toString()
         minutesAux.toString().length===1 ? minutesAux="0"+Math.floor(minutesAux).toString() : minutesAux=Math.floor(minutesAux).toString()
         hoursAux.toString().length===1 ? hoursAux="0"+Math.floor(hoursAux).toString() : hoursAux=Math.floor(hoursAux).toString()
-        daysAux.toString().length===1 ? daysAux="0"+Math.floor(daysAux).toString() : daysAux=Math.floor(daysAux).toString()
+        setDays(daysAux)
       
-        setDiff(daysAux +":"+ hoursAux +":"+ minutesAux +":"+ secondsAux)
+        setDiff(hoursAux +":"+ minutesAux +":"+ secondsAux)
       }
    }, 1000);
   }
@@ -97,6 +103,16 @@ const styles = StyleSheet.create({
       margin:10
     },
     digits: {
-      fontSize:50
+      fontSize:100,
+      marginLeft:28
+    },
+    counter: {
+      width: 300,
+      height: 300,
+      backgroundColor:'lightblue',
+      borderRadius:150,
+      padding: 20,
+      justifyContent: 'center',
+      alignItems:'center'
     }
 })
