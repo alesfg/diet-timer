@@ -39,7 +39,6 @@ function ProfilePhoto() {
           source={editPencil}
         ></Image>
       </TouchableOpacity>
-      {console.log(selectedImage)}
     </View>
   );
 }
