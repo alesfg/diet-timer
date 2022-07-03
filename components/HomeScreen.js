@@ -2,37 +2,31 @@ import React from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, Platform, Button } from 'react-native'
 import { useState, useEffect } from 'react'
 
-import DateTimePicker from '@react-native-community/datetimepicker';
 
 
 export default function HomeScreen({ name = "Clown" }) {
-  const [date, setDate] = useState(new Date())
-  const [mode, setmode] = useState(mode)
-  const [show, setshow] = useState(false)
-  const [text, settext] = useState('Empty')
-  const [diff, setdiff] = useState(null)
+  const [interval, setIntervalVar] = useState(null)
+  const [initialDate, setInitialDate] = useState(null)
+  const [diff, setDiff] = useState("00:00:00")
+  const [days, setDays] = useState("0")
+  const [hours, setHours] = useState()
+  const [minutes, setMinutes] = useState()
+  const [seconds, setSeconds] = useState()
 
-
-  
-  const onChange = (e, selectedDate) => {
-    const currentDate = selectedDate || date
-    setshow(Platform === 'ios')
-    setDate(currentDate)
-
-    let tempDate = new Date(currentDate)
-    let fDate = tempDate.getDate() + (tempDate.getMonth() + 1) + '/' + tempDate.getFullYear()
-    let fTime = 'Hours: ' + tempDate.getHours() + ' | Minutes: ' + tempDate.getMinutes()
-    settext(fDate + '\n' + fTime)
-
-    console.log(fDate)
-    console.log(fTime)
-  }
-
-  const showMode = (currentMode) => {
-    setshow(true)
-    setmode(currentMode)
-  }
-  
+    useEffect(() => {
+      if(interval){
+        clearInterval(interval);
+        crearIntervalo();
+      }else{
+        crearIntervalo();
+      }
+      
+    }, [initialDate])
+    
+    const reset = () => {
+      setInitialDate(new Date())
+      setDiff("00:00:00")
+    }
 
   return (
     <View style={styles.container}>
@@ -45,25 +39,47 @@ export default function HomeScreen({ name = "Clown" }) {
       </View>
       {/* Contador */}
       <View>
-      <Text>{text}</Text>
-      <Button title='Fecha' onPress={() => showMode('date')} />
-      <Button title='Hora' onPress={() => showMode('time')} />
-      {show && (
-        <DateTimePicker
-        testID = 'dateTimePicker'
-        value={date}
-        mode={mode}
-        is24Hour={true}
-        display='default'
-        onChange={onChange}
-        />
-      )}
-        <TouchableOpacity>
+        <View style={styles.counter}>
+          <View style={{flexDirection:'row'}}>
+          <Text style={styles.digits}>{days}</Text>
+          <Text style={{alignSelf:'flex-end',marginBottom:30, fontWeight:'bold'}}>{days===1 ? "day" : "days"}</Text>
+          </View>
+
+          <Text style={{fontWeight:'bold'}}>{diff}</Text>
+        </View>
+        <TouchableOpacity style={styles.button} onPress={reset}>
+          {initialDate ?
           <Text>He pecado 🍖</Text>
+          :
+          <Text>Empezar</Text>
+          }
+          
         </TouchableOpacity>
       </View>
     </View>
   )
+
+  function crearIntervalo(){
+    setIntervalVar(setInterval(() => {
+      if(initialDate){
+        let secondsAux = ((new Date() - initialDate)/(1000)%60)
+        setSeconds(secondsAux)
+        let minutesAux = Math.floor((new Date() - initialDate) / (60000)%60)
+        setMinutes(minutesAux)
+        let hoursAux = Math.floor((new Date() - initialDate) / (60000*60)%24)
+        setHours(hoursAux)
+        let daysAux = Math.floor((new Date() - initialDate) / (86400000))
+        
+        Math.floor(secondsAux).toString().length===1 ? secondsAux="0"+Math.floor(secondsAux).toString() : secondsAux=Math.floor(secondsAux).toString()
+        minutesAux.toString().length===1 ? minutesAux="0"+Math.floor(minutesAux).toString() : minutesAux=Math.floor(minutesAux).toString()
+        hoursAux.toString().length===1 ? hoursAux="0"+Math.floor(hoursAux).toString() : hoursAux=Math.floor(hoursAux).toString()
+        setDays(daysAux)
+      
+        setDiff(hoursAux +":"+ minutesAux +":"+ secondsAux)
+      }
+   }, 1000))
+  }
+
 }
 
 const styles = StyleSheet.create({
@@ -79,5 +95,24 @@ const styles = StyleSheet.create({
         color: '#126a5c',
         fontSize: 20,
         // backgroundColor: '#127f4a', '#f8efba'
+    },
+    button: {
+      backgroundColor:'#126a5c',
+      borderRadius: 5,
+      padding:10,
+      margin:10
+    },
+    digits: {
+      fontSize:100,
+      marginLeft:28
+    },
+    counter: {
+      width: 300,
+      height: 300,
+      backgroundColor:'lightblue',
+      borderRadius:150,
+      padding: 20,
+      justifyContent: 'center',
+      alignItems:'center'
     }
 })
