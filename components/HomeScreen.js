@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react'
 
 
 export default function HomeScreen({ name = "Clown" }) {
+  const [interval, setIntervalVar] = useState(null)
   const [initialDate, setInitialDate] = useState(null)
   const [diff, setDiff] = useState("00:00:00")
   const [days, setDays] = useState("0")
@@ -13,8 +14,8 @@ export default function HomeScreen({ name = "Clown" }) {
   const [seconds, setSeconds] = useState()
 
     useEffect(() => {
-      if(this._interval ){
-        clearInterval(this._interval);
+      if(interval){
+        clearInterval(interval);
         crearIntervalo();
       }else{
         crearIntervalo();
@@ -41,10 +42,10 @@ export default function HomeScreen({ name = "Clown" }) {
         <View style={styles.counter}>
           <View style={{flexDirection:'row'}}>
           <Text style={styles.digits}>{days}</Text>
-          <Text style={{alignSelf:'flex-end',marginBottom:30}}>{days===1 ? "day" : "days"}</Text>
+          <Text style={{alignSelf:'flex-end',marginBottom:30, fontWeight:'bold'}}>{days===1 ? "day" : "days"}</Text>
           </View>
 
-          <Text>{diff}</Text>
+          <Text style={{fontWeight:'bold'}}>{diff}</Text>
         </View>
         <TouchableOpacity style={styles.button} onPress={reset}>
           {initialDate ?
@@ -59,9 +60,8 @@ export default function HomeScreen({ name = "Clown" }) {
   )
 
   function crearIntervalo(){
-    this._interval = setInterval(() => {
+    setIntervalVar(setInterval(() => {
       if(initialDate){
-        console.log(initialDate.toLocaleString())
         let secondsAux = ((new Date() - initialDate)/(1000)%60)
         setSeconds(secondsAux)
         let minutesAux = Math.floor((new Date() - initialDate) / (60000)%60)
@@ -77,7 +77,7 @@ export default function HomeScreen({ name = "Clown" }) {
       
         setDiff(hoursAux +":"+ minutesAux +":"+ secondsAux)
       }
-   }, 1000);
+   }, 1000))
   }
 
 }
