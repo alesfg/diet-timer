@@ -4,7 +4,6 @@ import HomeScreen from "./components/HomeScreen";
 import Badges from "./components/Badges";
 import Profile from "./components/Profile";
 import "react-native-gesture-handler";
-import themes from "./components/themes";
 
 const Drawer = createDrawerNavigator();
 
@@ -14,7 +13,7 @@ export default function App() {
       <Drawer.Navigator
         screenOptions={{
           drawerPosition: "right",
-          drawerActiveBackgroundColor: themes.colors.secundaryColor,
+          drawerActiveBackgroundColor: "#126a5c",
         }}
       >
         <Drawer.Screen
@@ -22,7 +21,7 @@ export default function App() {
           component={HomeScreen}
           options={{
             headerStyle: {
-              backgroundColor: themes.colors.secundaryColor,
+              backgroundColor: "#eaeaa0",
             },
             headerTintColor: "#fff",
             headerTitleStyle: {
