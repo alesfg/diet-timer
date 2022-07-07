@@ -22,6 +22,8 @@ function ProfilePhoto() {
           resizeMode: "cover",
           marginLeft: pencilHeight,
           marginRight: -10,
+          borderWidth: 10,
+          borderColor: "#024D8C",
         }}
       ></Image>
       <TouchableOpacity
