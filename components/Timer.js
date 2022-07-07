@@ -11,7 +11,8 @@ const Timer = ({ initialDate }) => {
   useEffect(() => {
     clearInterval(interval);
     crearIntervalo();
-    setDiffTimer("00:00:00");
+
+    initialDate && actualizarDiferenciaTiempos();
   }, [initialDate]);
 
   return (
@@ -28,24 +29,28 @@ const Timer = ({ initialDate }) => {
     setIntervalVar(
       setInterval(() => {
         if (initialDate) {
-          //calculamos la diferencia de tiempo
-          let diferencia = new Date() - initialDate;
-          let seconds = Math.floor((diferencia / 1000) % 60);
-          let minutes = Math.floor((diferencia / 60000) % 60);
-          let hours = Math.floor((diferencia / 3600000) % 24);
-          let daysAux = Math.floor(diferencia / 86400000);
-
-          //Controlamos que tenga dos cifras el string (en caso de tener una la primera es un 0)
-          seconds = leftCero(seconds);
-          minutes = leftCero(minutes);
-          hours = leftCero(hours);
-
-          //Guardamos los nuevos estados calculados
-          setDiffTimer(hours + ":" + minutes + ":" + seconds);
-          setDays(daysAux);
+          actualizarDiferenciaTiempos();
         }
       }, 1000)
     );
+  }
+
+  function actualizarDiferenciaTiempos() {
+    //calculamos la diferencia de tiempo
+    let diferencia = new Date() - initialDate;
+    let seconds = Math.floor((diferencia / 1000) % 60);
+    let minutes = Math.floor((diferencia / 60000) % 60);
+    let hours = Math.floor((diferencia / 3600000) % 24);
+    let daysAux = Math.floor(diferencia / 86400000);
+
+    //Controlamos que tenga dos cifras el string (en caso de tener una la primera es un 0)
+    seconds = leftCero(seconds);
+    minutes = leftCero(minutes);
+    hours = leftCero(hours);
+
+    //Guardamos los nuevos estados calculados
+    setDiffTimer(hours + ":" + minutes + ":" + seconds);
+    setDays(daysAux);
   }
 
   function leftCero(number) {

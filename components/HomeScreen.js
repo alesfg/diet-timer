@@ -3,9 +3,20 @@ import { View, Text, TouchableOpacity } from "react-native";
 import { useState, useEffect } from "react";
 import Timer from "./Timer";
 import styles from "./Styles";
+import storage from "../storage/storage";
 
 export default function HomeScreen({ name = "Clown" }) {
   const [initialDate, setInitialDate] = useState(null);
+
+  useEffect(() => {
+    storage.load({
+      key: "initialDateStorage",
+      id: "1",
+    });
+    storage.getAllDataForKey("initialDateStorage").then((dates) => {
+      setInitialDate(dates[0]);
+    });
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -28,6 +39,13 @@ export default function HomeScreen({ name = "Clown" }) {
   );
 
   function reset() {
-    setInitialDate(new Date());
+    const date = new Date();
+    setInitialDate(date);
+    storage.save({
+      key: "initialDateStorage", // Note: Do not use underscore("_") in key!
+      id: "1",
+      data: date.getTime(),
+      expires: null,
+    });
   }
 }
