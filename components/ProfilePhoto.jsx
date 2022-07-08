@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { View, Image, Text, StyleSheet, TouchableOpacity } from "react-native";
-import average from "../assets/average.jpg";
 import editPencil from "../assets/EditPencil.png";
 import * as ImagePicker from "expo-image-picker";
 
@@ -23,6 +22,8 @@ function ProfilePhoto() {
           resizeMode: "cover",
           marginLeft: pencilHeight,
           marginRight: -10,
+          borderWidth: 10,
+          borderColor: "#024D8C",
         }}
       ></Image>
       <TouchableOpacity
@@ -40,7 +41,6 @@ function ProfilePhoto() {
           source={editPencil}
         ></Image>
       </TouchableOpacity>
-      {console.log(selectedImage)}
     </View>
   );
 }
