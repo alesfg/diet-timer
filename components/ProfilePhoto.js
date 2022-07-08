@@ -8,7 +8,7 @@ function ProfilePhoto() {
   const [selectedImage, setSelectedImage] = useState(null);
 
   return (
-    <View style={{ flexDirection: "row" }}>
+    <View style={{ flexDirection: "row", marginTop: 10 }}>
       <Image
         source={{
           uri:

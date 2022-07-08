@@ -1,28 +1,21 @@
 import React, { Fragment, useState, useRef } from "react";
-import {
-  View,
-  Image,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  Button,
-} from "react-native";
+import { View, Image, Text } from "react-native";
 import { FlatList, ScrollView } from "react-native-gesture-handler";
 import Animated from "react-native-reanimated";
 import DateIcon from "../assets/ProfileStats/DateIcon.png";
+import themes from "./themes";
 
 const ProfileStats = () => {
   const [statsData, setStatsData] = useState(getProfileData());
   const STATSIZE = 160;
-  const SPACING = 20;
+  const SPACING = 35;
   const scrollY = React.useRef(new Animated.Value(0)).current;
   return (
     <Animated.FlatList
       //style={{ backgroundColor: "gray" }}
       contentContainerStyle={{
         padding: SPACING,
-        paddingBottom: SPACING + 150,
-        paddingTop: SPACING + 50,
+        paddingTop: -10,
       }}
       onScroll={Animated.event(
         [{ nativeEvent: { contentOffset: { y: scrollY } } }],
@@ -50,13 +43,13 @@ const ProfileStats = () => {
             key={stats.title}
             style={{
               margin: 2,
-              backgroundColor: "rgba(48, 88, 230, 0.55)",
+              backgroundColor: themes.colors.primaryColor,
               borderRadius: 40,
               height: STATSIZE,
               width: STATSIZE,
               alignItems: "center",
               justifyContent: "center",
-              shadowColor: "#000",
+              shadowColor: themes.colors.black,
               shadowOffset: { width: 0, height: 10 },
               shadowOpacity: 0.3,
               shadowRadius: 20,
@@ -68,8 +61,9 @@ const ProfileStats = () => {
               style={{
                 width: 50,
                 height: 50,
-                borderColor: "#727272",
-                borderWidth: 1,
+                borderColor: themes.colors.secundaryColor,
+                borderWidth: 2,
+                backgroundColor: themes.colors.white,
                 borderRadius: 25,
                 justifyContent: "center",
                 alignItems: "center",
@@ -77,13 +71,23 @@ const ProfileStats = () => {
             >
               <Image
                 source={DateIcon}
-                style={{ width: 30, height: 30, tintColor: "#DC1D1D" }}
+                style={{
+                  width: 30,
+                  height: 30,
+                  tintColor: themes.colors.secundaryColor,
+                }}
               ></Image>
             </View>
-            <Text style={{ color: "black", textAlign: "center" }}>
+            <Text
+              style={{
+                color: themes.colors.secundaryColor,
+                textAlign: "center",
+                fontWeight: "bold",
+              }}
+            >
               {stats.title}
             </Text>
-            <Text style={{ color: "white", textAlign: "center" }}>
+            <Text style={{ color: themes.colors.white, textAlign: "center" }}>
               {stats.description}
             </Text>
           </Animated.View>

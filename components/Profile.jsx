@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { View, Image, Text, StyleSheet } from "react-native";
 import ProfilePhoto from "./ProfilePhoto";
 import ProfileStats from "./ProfileStats";
+import themes from "./themes";
 
 function Profile() {
   return (
@@ -13,12 +14,9 @@ function Profile() {
 }
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    height: "100%",
-    backgroundColor: "#F3F7FA",
-    color: "#8ab971",
+    backgroundColor: themes.colors.backgroundColor,
     alignItems: "center",
-    paddingTop: 90,
+    paddingTop: 45,
   },
 });
 
