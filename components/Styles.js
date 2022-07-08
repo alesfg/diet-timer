@@ -3,6 +3,7 @@ import themes from "./themes";
 
 const styles = StyleSheet.create({
   tittle: {
+    paddingBottom: 22,
     paddingBottom: 60,
     fontSize: 60,
     color: themes.colors.secundaryColor,
@@ -23,6 +24,16 @@ const styles = StyleSheet.create({
     color: themes.colors.white,
     fontFamily: themes.fonts.primaryFont,
     alignSelf: "center",
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+  button: {
+    backgroundColor: themes.colors.primaryColor,
+    borderRadius: 10,
+    padding: 17,
+    margin: 20,
+    borderColor: themes.colors.secundaryColor,
+    borderWidth: 2,
   },
   button: {
     backgroundColor: themes.colors.primaryColor,
@@ -35,10 +46,38 @@ const styles = StyleSheet.create({
     marginLeft: 28,
     color: themes.colors.white,
   },
+  badge: {
+    alignItems: "center",
+    justifyContent: "space-between",
+    flexDirection: "row",
+    width: 280,
+    height: 70,
+    backgroundColor: themes.colors.primaryColor,
+    borderRadius: 10,
+    borderColor: themes.colors.secundaryColor,
+    borderWidth: 3,
+  },
+  badgeText: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: themes.colors.white,
+    marginLeft: 30,
+  },
+  badgeImage: {
+    width: 115,
+    height: 115,
+    borderRadius: 100,
+    marginRight: -15,
+    borderColor: themes.colors.secundaryColor,
+    borderWidth: 3,
+    backgroundColor: themes.colors.primaryColor,
+  },
   timer: {
     borderColor: themes.colors.secundaryColor,
     borderWidth: 10,
     border: 10,
+    width: 280,
+    height: 280,
     width: 300,
     height: 300,
     backgroundColor: themes.colors.primaryColor,
