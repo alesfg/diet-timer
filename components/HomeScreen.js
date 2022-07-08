@@ -8,6 +8,7 @@ import badges from "./badgesArray.js";
 
 export default function HomeScreen({ name = "Clown" }) {
   const [initialDate, setInitialDate] = useState(null);
+  const [sourceImgBadge, setSourceImgBadge] = useState(badges[0].img);
 
   useEffect(() => {
     storage.load({
@@ -25,13 +26,13 @@ export default function HomeScreen({ name = "Clown" }) {
       <View style={styles.badge}>
         <Text style={styles.badgeText}>Current Badge:</Text>
         <Image
-          source={badges[calcularBadge()].img}
+          source={sourceImgBadge}
           resizeMode="cover"
           style={styles.badgeImage}
         />
       </View>
       <View style={styles.containerTimerButton}>
-        <Timer initialDate={initialDate} />
+        <Timer initialDate={initialDate} actualizarBadge={actualizarBadge} />
         <TouchableOpacity style={styles.button} onPress={reset}>
           {initialDate ? (
             <Text style={styles.textButton}>He pecado 🍖</Text>
@@ -43,10 +44,9 @@ export default function HomeScreen({ name = "Clown" }) {
     </View>
   );
 
-  function calcularBadge() {
+  function actualizarBadge() {
     let diff = new Date() - initialDate;
     let badgeActual = 1;
-
     //recorremos cada badge, y la primera que encontramos con un valor tiempo mayor al que tenemos nos salimos
     for (let i = 0; i < badges.length; i++) {
       if (badges[i].time > diff) {
@@ -56,7 +56,8 @@ export default function HomeScreen({ name = "Clown" }) {
         badgeActual = i + 1;
       }
     }
-    return badgeActual - 1;
+    badgeActual = badgeActual - 1;
+    setSourceImgBadge(badges[badgeActual].img);
   }
   function reset() {
     const date = new Date();
