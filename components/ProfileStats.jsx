@@ -13,89 +13,15 @@ import DateIcon from "../assets/ProfileStats/DateIcon.png";
 
 const ProfileStats = () => {
   const [statsData, setStatsData] = useState(getProfileData());
-  const [alturaAux, setAlturaAux] = useState(140);
-  const ref1 = [
-    useRef(),
-    useRef(),
-    useRef(),
-    useRef(),
-    useRef(),
-    useRef(),
-    useRef(),
-    useRef(),
-    useRef(),
-    useRef(),
-    useRef(),
-    useRef(),
-    useRef(),
-    useRef(),
-    useRef(),
-    useRef(),
-  ];
+  const STATSIZE = 140;
+  const SPACING = 20;
   const scrollY = React.useRef(new Animated.Value(0)).current;
   return (
-    // <ScrollView
-    //   onScroll={(eventAux) => handleScroll(ref1, setAlturaAux, eventAux)}
-    //   showsVerticalScrollIndicator={false}
-    //   showsHorizontalScrollIndicator={false}
-    //   style={{
-    //     marginTop: 0,
-    //     width: 400,
-    //   }}
-    //   contentContainerStyle={{
-    //     justifyContent: "center",
-    //     flexDirection: "row",
-    //     flexWrap: "wrap",
-    //     padding: 25,
-    //     paddingTop: 5,
-    //   }}
-    // >
-    //   {statsData.map((stats, i) => (
-    // <View
-    //   key={stats.title}
-    //   ref={ref1[i]}
-    //   style={{
-    //     backgroundColor: "rgba(48, 88, 230, 0.55)",
-    //     borderRadius: 40,
-    //     height: alturaAux,
-    //     width: alturaAux,
-    //     alignItems: "center",
-    //     margin: 10,
-    //     padding: 20,
-    //     justifyContent: "center",
-    //     shadowColor: "#000",
-    //     shadowOffset: { width: 0, height: 10 },
-    //     shadowOpacity: 0.3,
-    //     shadowRadius: 20,
-    //   }}
-    // >
-    //   <View
-    //     style={{
-    //       width: 50,
-    //       height: 50,
-    //       borderColor: "#727272",
-    //       borderWidth: 1,
-    //       borderRadius: 25,
-    //       justifyContent: "center",
-    //       alignItems: "center",
-    //     }}
-    //   >
-    //     <Image
-    //       source={DateIcon}
-    //       style={{ width: 30, height: 30, tintColor: "#DC1D1D" }}
-    //     ></Image>
-    //   </View>
-    //   <Text style={{ color: "black", textAlign: "center" }}>
-    //     {stats.title}
-    //   </Text>
-    //   <Text style={{ color: "white", textAlign: "center" }}>
-    //     {stats.description}
-    //   </Text>
-    // </View>
-    //   ))}
-    // </ScrollView>
     <Animated.FlatList
-      contentContainerStyle={{ paddingBottom: 22 }}
+      contentContainerStyle={{
+        padding: SPACING,
+        paddingBottom: SPACING + 60,
+      }}
       onScroll={Animated.event(
         [{ nativeEvent: { contentOffset: { y: scrollY } } }],
         { useNativeDriver: true }
@@ -104,18 +30,16 @@ const ProfileStats = () => {
       numColumns={2}
       data={statsData}
       renderItem={({ item: stats, index }) => {
+        const ITEMSIZE = STATSIZE * 0.5 + 10.4;
+        const indexFixed = index % 2 === 0 ? index : index - 1;
+
         const inputRange = [
           -1,
           0,
-          (index % 2 === 0 ? index : index - 1) * alturaAux * 0.5,
-          alturaAux * 0.5 * ((index % 2 === 0 ? index : index - 1) + 1.5),
+          indexFixed * ITEMSIZE,
+          ITEMSIZE * (indexFixed + 2),
         ];
-        const opinputRange = [
-          -1,
-          0,
-          (index % 2 === 0 ? index : index - 1) * alturaAux,
-          alturaAux * ((index % 2 === 0 ? index : index - 1) + 0.1),
-        ];
+
         const scale = scrollY.interpolate({
           inputRange,
           outputRange: [1, 1, 1, 0],
@@ -130,8 +54,8 @@ const ProfileStats = () => {
             style={{
               backgroundColor: "rgba(48, 88, 230, 0.55)",
               borderRadius: 40,
-              height: alturaAux,
-              width: alturaAux,
+              height: STATSIZE,
+              width: STATSIZE,
               alignItems: "center",
               margin: 10,
               padding: 20,
@@ -173,15 +97,6 @@ const ProfileStats = () => {
   );
 };
 
-const handleScroll = (referencia, setAltura, event) => {
-  // let alturaRelativa = event.nativeEvent. -event.nativeEvent.contentOffset.y;
-  //console.log("content: " + event.nativeEvent.contentOffset.y);
-  console.log("AlturaPrimerElemento: " + 1);
-
-  //setAltura(100);
-  console.log(referencia[0].current.clientHeight);
-};
-
 const getProfileData = () => {
   let data = [{ title: "title", description: "description" }]; //Escribimos con plantilla vacia
 
@@ -215,6 +130,30 @@ const getProfileData = () => {
   };
   data[7] = {
     title: "asda43sd",
+    description: "asdasd",
+  };
+  data[6] = {
+    title: "asd232asd:",
+    description: "asdasd",
+  };
+  data[8] = {
+    title: "asda122343sd",
+    description: "asdasd",
+  };
+  data[9] = {
+    title: "asd21332asd:",
+    description: "asdasd",
+  };
+  data[10] = {
+    title: "asda3443sd",
+    description: "asdasd",
+  };
+  data[11] = {
+    title: "asd25432asd:",
+    description: "asdasd",
+  };
+  data[12] = {
+    title: "asda4365sd",
     description: "asdasd",
   };
 
