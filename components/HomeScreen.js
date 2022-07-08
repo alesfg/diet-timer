@@ -8,7 +8,7 @@ import badges from "./badgesArray.js";
 
 export default function HomeScreen({ name = "Clown" }) {
   const [initialDate, setInitialDate] = useState(null);
-  const [sourceImgBadge, setSourceImgBadge] = useState(badges[0].img);
+  const [badge, setBadge] = useState(badges[0]);
 
   useEffect(() => {
     storage.load({
@@ -24,9 +24,12 @@ export default function HomeScreen({ name = "Clown" }) {
     <View style={styles.container}>
       <Text style={styles.tittle}>DIET TIMER</Text>
       <View style={styles.badge}>
-        <Text style={styles.badgeText}>Current Badge:</Text>
+        <View style={{ alignItems: "center", marginLeft: 60 }}>
+          <Text style={styles.badgeLabel}>{badge.name}</Text>
+          <Text style={styles.badgeText}>Current Badge</Text>
+        </View>
         <Image
-          source={sourceImgBadge}
+          source={badge.img}
           resizeMode="cover"
           style={styles.badgeImage}
         />
@@ -57,7 +60,7 @@ export default function HomeScreen({ name = "Clown" }) {
       }
     }
     badgeActual = badgeActual - 1;
-    setSourceImgBadge(badges[badgeActual].img);
+    setBadge(badges[badgeActual]);
   }
   function reset() {
     const date = new Date();

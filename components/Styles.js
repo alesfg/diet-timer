@@ -50,11 +50,14 @@ const styles = StyleSheet.create({
     borderColor: themes.colors.secundaryColor,
     borderWidth: 3,
   },
-  badgeText: {
-    fontSize: 20,
+  badgeLabel: {
     fontWeight: "bold",
+    fontSize: 25,
+    color: themes.colors.black,
+  },
+  badgeText: {
+    fontSize: 13,
     color: themes.colors.white,
-    marginLeft: 30,
   },
   badgeImage: {
     width: 115,

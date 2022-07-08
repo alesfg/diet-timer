@@ -8,7 +8,7 @@ const themes = {
   },
 
   fonts: {
-    primaryFont: "Amaranth",
+    primaryFont: "Roboto",
   },
 };
 export default themes;
