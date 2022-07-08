@@ -3,7 +3,7 @@ import { View, Text } from "react-native";
 import { useState, useEffect } from "react";
 import styles from "./Styles";
 
-const Timer = ({ initialDate }) => {
+const Timer = ({ initialDate, actualizarBadge }) => {
   const [days, setDays] = useState("0");
   const [interval, setIntervalVar] = useState(null);
   const [diffTimer, setDiffTimer] = useState("00:00:00");
@@ -13,6 +13,7 @@ const Timer = ({ initialDate }) => {
     crearIntervalo();
 
     initialDate && actualizarDiferenciaTiempos();
+    initialDate && actualizarBadge();
   }, [initialDate]);
 
   return (
@@ -30,6 +31,7 @@ const Timer = ({ initialDate }) => {
       setInterval(() => {
         if (initialDate) {
           actualizarDiferenciaTiempos();
+          actualizarBadge();
         }
       }, 1000)
     );
