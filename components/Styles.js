@@ -4,6 +4,7 @@ import themes from "./themes";
 const styles = StyleSheet.create({
   tittle: {
     paddingBottom: 22,
+    paddingBottom: 60,
     fontSize: 60,
     color: themes.colors.secundaryColor,
     fontWeight: "bold",
@@ -33,6 +34,12 @@ const styles = StyleSheet.create({
     margin: 20,
     borderColor: themes.colors.secundaryColor,
     borderWidth: 2,
+  },
+  button: {
+    backgroundColor: themes.colors.primaryColor,
+    borderRadius: 5,
+    padding: 20,
+    margin: 10,
   },
   digits: {
     fontSize: 100,
@@ -71,6 +78,8 @@ const styles = StyleSheet.create({
     border: 10,
     width: 280,
     height: 280,
+    width: 300,
+    height: 300,
     backgroundColor: themes.colors.primaryColor,
     borderRadius: 150,
     padding: 20,
