@@ -13,14 +13,16 @@ import DateIcon from "../assets/ProfileStats/DateIcon.png";
 
 const ProfileStats = () => {
   const [statsData, setStatsData] = useState(getProfileData());
-  const STATSIZE = 140;
+  const STATSIZE = 160;
   const SPACING = 20;
   const scrollY = React.useRef(new Animated.Value(0)).current;
   return (
     <Animated.FlatList
+      //style={{ backgroundColor: "gray" }}
       contentContainerStyle={{
         padding: SPACING,
-        paddingBottom: SPACING + 60,
+        paddingBottom: SPACING + 150,
+        paddingTop: SPACING + 50,
       }}
       onScroll={Animated.event(
         [{ nativeEvent: { contentOffset: { y: scrollY } } }],
@@ -30,35 +32,29 @@ const ProfileStats = () => {
       numColumns={2}
       data={statsData}
       renderItem={({ item: stats, index }) => {
-        const ITEMSIZE = STATSIZE * 0.5 + 10.4;
+        const ITEMSIZE = STATSIZE * 0.5 + 10;
         const indexFixed = index % 2 === 0 ? index : index - 1;
 
-        const inputRange = [
-          -1,
-          0,
-          indexFixed * ITEMSIZE,
-          ITEMSIZE * (indexFixed + 2),
-        ];
+        const inputRange = [-10000, indexFixed * (ITEMSIZE - 8), 10000];
 
         const scale = scrollY.interpolate({
           inputRange,
-          outputRange: [1, 1, 1, 0],
+          outputRange: [-40, 1, -40],
         });
         const opacity = scrollY.interpolate({
           inputRange,
-          outputRange: [1, 1, 1, 0],
+          outputRange: [-50, 1, -80],
         });
         return (
           <Animated.View
             key={stats.title}
             style={{
+              margin: 2,
               backgroundColor: "rgba(48, 88, 230, 0.55)",
               borderRadius: 40,
               height: STATSIZE,
               width: STATSIZE,
               alignItems: "center",
-              margin: 10,
-              padding: 20,
               justifyContent: "center",
               shadowColor: "#000",
               shadowOffset: { width: 0, height: 10 },
@@ -153,7 +149,19 @@ const getProfileData = () => {
     description: "asdasd",
   };
   data[12] = {
-    title: "asda4365sd",
+    title: "asda43ert65sd",
+    description: "asdasd",
+  };
+  data[13] = {
+    title: "asda436ert5sd",
+    description: "asdasd",
+  };
+  data[14] = {
+    title: "asdawe4365sd",
+    description: "asdasd",
+  };
+  data[15] = {
+    title: "asda43wer65sd",
     description: "asdasd",
   };
 
