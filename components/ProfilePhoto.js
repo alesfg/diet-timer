@@ -43,7 +43,6 @@ function ProfilePhoto() {
           source={editPencil}
         ></Image>
       </TouchableOpacity>
-      {console.log(selectedImage)}
     </View>
   );
 }
@@ -61,12 +60,9 @@ let openImagePickerAsync = async (setSelectedImageF) => {
     alert("Required permision");
   } else {
     const PickerResult = await ImagePicker.launchImageLibraryAsync();
-    console.log(PickerResult.uri);
 
     if (PickerResult.cancelled === true) {
-      console.log("cancelado");
     } else {
-      console.log("palante");
       setSelectedImageF(PickerResult.uri);
     }
   }
