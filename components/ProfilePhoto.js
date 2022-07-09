@@ -3,6 +3,7 @@ import { View, Image, Text, StyleSheet, TouchableOpacity } from "react-native";
 import average from "../assets/average.jpg";
 import editPencil from "../assets/EditPencil.png";
 import * as ImagePicker from "expo-image-picker";
+import themes from "./themes";
 
 function ProfilePhoto() {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -23,6 +24,8 @@ function ProfilePhoto() {
           resizeMode: "cover",
           marginLeft: pencilHeight,
           marginRight: -10,
+          borderColor: themes.colors.secundaryColor,
+          borderWidth: 5,
         }}
       ></Image>
       <TouchableOpacity
