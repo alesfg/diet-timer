@@ -1,5 +1,6 @@
 import React, { Fragment, useState, useRef } from "react";
 import { View, Image, Text } from "react-native";
+import styles from "./Styles";
 
 const ProfileName = ({ nombre }) => {
   return (
@@ -10,14 +11,7 @@ const ProfileName = ({ nombre }) => {
         margin: 30,
       }}
     >
-      <Text
-        style={{
-          fontSize: 50,
-          textAlign: "center",
-        }}
-      >
-        {nombre}
-      </Text>
+      <Text style={styles.badgeLabel}>{nombre}</Text>
     </View>
   );
 };

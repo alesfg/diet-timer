@@ -2,8 +2,13 @@ import React, { Fragment, useState, useRef } from "react";
 import { View, Image, Text } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import Animated from "react-native-reanimated";
-import DateIcon from "../assets/ProfileStats/DateIcon.png";
+import FirstDateIcon from "../assets/ProfileStats/FirstDateIcon.png";
+import LastDateIcon from "../assets/ProfileStats/LastDateIcon.png";
 import themes from "./themes";
+import LongestIcon from "../assets/ProfileStats/LongestIcon.png";
+import NumberIcon from "../assets/ProfileStats/NumberIcon.png";
+import BadgeIcon from "../assets/ProfileStats/BadgeIcon.png";
+import MaximumBadgeIcon from "../assets/ProfileStats/MaximumBadgeIcon.png";
 
 const ProfileStats = () => {
   const [statsData, setStatsData] = useState(getProfileData());
@@ -71,11 +76,12 @@ const ProfileStats = () => {
               }}
             >
               <Image
-                source={DateIcon}
+                source={stats.icon}
                 style={{
                   width: 30,
                   height: 30,
-                  tintColor: themes.colors.secundaryColor,
+                  tintColor: stats.color,
+                  resizeMode: "contain",
                 }}
               ></Image>
             </View>
@@ -102,72 +108,107 @@ const getProfileData = () => {
   let data = [{ title: "title", description: "description" }]; //Escribimos con plantilla vacia
 
   data[0] = {
-    title: "Last diet date:",
-    description: "HOY",
-  };
-  data[1] = {
-    title: "Longest diet:",
-    description: "3 Days!",
-  };
-  data[2] = {
-    title: "Times diet had been broken:",
-    description: "4",
-  };
-  data[3] = {
-    title: "Maximum badge level:",
-    description: "PEPE",
-  };
-  data[4] = {
     title: "First diet date:",
     description: "12/03/2002",
+    color: "red",
+    icon: FirstDateIcon,
   };
+  data[1] = {
+    title: "Last diet date:",
+    description: "HOY",
+    color: "blue",
+    icon: LastDateIcon,
+  };
+  data[2] = {
+    title: "Longest diet:",
+    description: "3 Days!",
+    color: "purple",
+    icon: LongestIcon,
+  };
+  data[3] = {
+    title: "Times sinned:",
+    description: "4",
+    color: "green",
+    icon: NumberIcon,
+  };
+  data[4] = {
+    title: "Maximum badge level:",
+    description: "PEPE",
+    color: "orange",
+    icon: BadgeIcon,
+  };
+
   data[5] = {
-    title: "asda123sd",
-    description: "asdasd",
+    title: "Maximum badge date:",
+    description: "24/05/1999",
+    color: "black",
+    icon: MaximumBadgeIcon,
   };
   data[6] = {
     title: "asd232asd:",
-    description: "asdasd",
+    description: "EXAMPLE",
+    color: "navy",
+    icon: LongestIcon,
   };
   data[7] = {
     title: "asda43sd",
-    description: "asdasd",
+    description: "EXAMPLE",
+    color: "blue",
+    icon: LongestIcon,
   };
   data[6] = {
     title: "asd232asd:",
-    description: "asdasd",
+    description: "EXAMPLE",
+    color: "blue",
+    icon: LongestIcon,
   };
   data[8] = {
     title: "asda122343sd",
-    description: "asdasd",
+    description: "EXAMPLE",
+    color: "blue",
+    icon: LongestIcon,
   };
   data[9] = {
     title: "asd21332asd:",
-    description: "asdasd",
+    description: "EXAMPLE",
+    color: "blue",
+    icon: LongestIcon,
   };
   data[10] = {
     title: "asda3443sd",
-    description: "asdasd",
+    description: "EXAMPLE",
+    color: "blue",
+    icon: LongestIcon,
   };
   data[11] = {
     title: "asd25432asd:",
-    description: "asdasd",
+    description: "EXAMPLE",
+    color: "blue",
+    icon: LongestIcon,
   };
   data[12] = {
     title: "asda43ert65sd",
-    description: "asdasd",
+    description: "EXAMPLE",
+    color: "blue",
+    icon: LongestIcon,
   };
   data[13] = {
     title: "asda436ert5sd",
-    description: "asdasd",
+    description: "EXAMPLE",
+    color: "blue",
+    icon: LongestIcon,
   };
   data[14] = {
     title: "asdawe4365sd",
-    description: "asdasd",
+    description: "EXAMPLE",
+    color: "blue",
+    icon: LongestIcon,
   };
   data[15] = {
     title: "asda43wer65sd",
-    description: "asdasd",
+    description: "EXAMPLE",
+    color: "blue",
+    icon: LongestIcon,
   };
 
   return data;
