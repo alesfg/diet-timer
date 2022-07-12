@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: themes.colors.backgroundColor,
     alignItems: "center",
-    paddingTop: 45,
+    paddingTop: 0,
   },
 });
 

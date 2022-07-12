@@ -3,8 +3,21 @@ import { View, Image, Text } from "react-native";
 
 const ProfileName = ({ nombre }) => {
   return (
-    <View>
-      <Text style={{ fontSize: 50, textAlign: "center" }}>{nombre} </Text>
+    <View
+      style={{
+        justifyContent: "center",
+        alignItems: "center",
+        margin: 30,
+      }}
+    >
+      <Text
+        style={{
+          fontSize: 50,
+          textAlign: "center",
+        }}
+      >
+        {nombre}
+      </Text>
     </View>
   );
 };
