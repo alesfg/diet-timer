@@ -33,7 +33,7 @@ function ProfilePhoto() {
         style={{
           //   backgroundColor: "red",
           //   marginLeft: 10,
-          marginBottom: imageHeight,
+          marginBottom: 0,
           padding: 5,
           marginLeft: 0,
         }}

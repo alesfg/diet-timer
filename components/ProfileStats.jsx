@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useRef } from "react";
 import { View, Image, Text } from "react-native";
-import { FlatList, ScrollView } from "react-native-gesture-handler";
+import { FlatList } from "react-native-gesture-handler";
 import Animated from "react-native-reanimated";
 import DateIcon from "../assets/ProfileStats/DateIcon.png";
 import themes from "./themes";
@@ -10,12 +10,14 @@ const ProfileStats = () => {
   const STATSIZE = 160;
   const SPACING = 35;
   const scrollY = React.useRef(new Animated.Value(0)).current;
+  const ITEMSIZE = STATSIZE * 0.5 + 10;
   return (
     <Animated.FlatList
       //style={{ backgroundColor: "gray" }}
       contentContainerStyle={{
         padding: SPACING,
-        paddingTop: -10,
+        paddingBottom: ITEMSIZE * 5,
+        paddingTop: 60,
       }}
       onScroll={Animated.event(
         [{ nativeEvent: { contentOffset: { y: scrollY } } }],
@@ -25,18 +27,17 @@ const ProfileStats = () => {
       numColumns={2}
       data={statsData}
       renderItem={({ item: stats, index }) => {
-        const ITEMSIZE = STATSIZE * 0.5 + 10;
         const indexFixed = index % 2 === 0 ? index : index - 1;
 
         const inputRange = [-10000, indexFixed * (ITEMSIZE - 8), 10000];
 
         const scale = scrollY.interpolate({
           inputRange,
-          outputRange: [-40, 1, -40],
+          outputRange: [-40, 1, -60],
         });
         const opacity = scrollY.interpolate({
           inputRange,
-          outputRange: [-50, 1, -80],
+          outputRange: [-50, 1, -120],
         });
         return (
           <Animated.View
