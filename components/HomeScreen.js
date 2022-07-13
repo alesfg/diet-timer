@@ -3,8 +3,9 @@ import { View, Image, Text, TouchableOpacity } from "react-native";
 import { useState, useEffect } from "react";
 import Timer from "./Timer";
 import styles from "./Styles";
-import storage from "../storage/storage";
+
 import badges from "./badgesArray.js";
+import { saveData, loadData } from "./Utilities.js";
 
 export default function HomeScreen({ name = "Clown" }) {
   const [initialDate, setInitialDate] = useState(null);
@@ -59,32 +60,8 @@ export default function HomeScreen({ name = "Clown" }) {
   function reset() {
     const date = new Date();
 
+    setInitialDate(date);
     saveData(date.getTime(), "initialDateStorage", "1");
-  }
-
-  function saveData(data, dataKey, dataId) {
-    setInitialDate(data);
-    storage.save({
-      key: dataKey, // Note: Do not use underscore("_") in key!
-      id: dataId,
-      data: data,
-      expires: null,
-    });
-  }
-
-  async function loadData(datakey, dataId) {
-    //returns data
-
-    let data;
-
-    storage.load({
-      key: datakey,
-      id: dataId,
-    });
-
-    data = await storage.getAllDataForKey(datakey);
-
-    return data;
   }
 
   async function setInitialDateAwait() {
