@@ -21,7 +21,7 @@ const ProfileStats = () => {
       //style={{ backgroundColor: "gray" }}
       contentContainerStyle={{
         padding: SPACING,
-        paddingBottom: ITEMSIZE * 5,
+        paddingBottom: (ITEMSIZE + SPACING) * 4,
         paddingTop: 60,
       }}
       onScroll={Animated.event(
@@ -143,72 +143,6 @@ const getProfileData = () => {
     description: "24/05/1999",
     color: "black",
     icon: MaximumBadgeIcon,
-  };
-  data[6] = {
-    title: "asd232asd:",
-    description: "EXAMPLE",
-    color: "navy",
-    icon: LongestIcon,
-  };
-  data[7] = {
-    title: "asda43sd",
-    description: "EXAMPLE",
-    color: "blue",
-    icon: LongestIcon,
-  };
-  data[6] = {
-    title: "asd232asd:",
-    description: "EXAMPLE",
-    color: "blue",
-    icon: LongestIcon,
-  };
-  data[8] = {
-    title: "asda122343sd",
-    description: "EXAMPLE",
-    color: "blue",
-    icon: LongestIcon,
-  };
-  data[9] = {
-    title: "asd21332asd:",
-    description: "EXAMPLE",
-    color: "blue",
-    icon: LongestIcon,
-  };
-  data[10] = {
-    title: "asda3443sd",
-    description: "EXAMPLE",
-    color: "blue",
-    icon: LongestIcon,
-  };
-  data[11] = {
-    title: "asd25432asd:",
-    description: "EXAMPLE",
-    color: "blue",
-    icon: LongestIcon,
-  };
-  data[12] = {
-    title: "asda43ert65sd",
-    description: "EXAMPLE",
-    color: "blue",
-    icon: LongestIcon,
-  };
-  data[13] = {
-    title: "asda436ert5sd",
-    description: "EXAMPLE",
-    color: "blue",
-    icon: LongestIcon,
-  };
-  data[14] = {
-    title: "asdawe4365sd",
-    description: "EXAMPLE",
-    color: "blue",
-    icon: LongestIcon,
-  };
-  data[15] = {
-    title: "asda43wer65sd",
-    description: "EXAMPLE",
-    color: "blue",
-    icon: LongestIcon,
   };
 
   return data;
