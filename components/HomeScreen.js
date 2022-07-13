@@ -11,13 +11,7 @@ export default function HomeScreen({ name = "Clown" }) {
   const [badge, setBadge] = useState(badges[0]);
 
   useEffect(() => {
-    storage.load({
-      key: "initialDateStorage",
-      id: "1",
-    });
-    storage.getAllDataForKey("initialDateStorage").then((dates) => {
-      setInitialDate(dates[0]);
-    });
+    setInitialDateAwait();
   }, []);
 
   return (
@@ -64,12 +58,38 @@ export default function HomeScreen({ name = "Clown" }) {
   }
   function reset() {
     const date = new Date();
-    setInitialDate(date);
+
+    saveData(date.getTime(), "initialDateStorage", "1");
+  }
+
+  function saveData(data, dataKey, dataId) {
+    setInitialDate(data);
     storage.save({
-      key: "initialDateStorage", // Note: Do not use underscore("_") in key!
-      id: "1",
-      data: date.getTime(),
+      key: dataKey, // Note: Do not use underscore("_") in key!
+      id: dataId,
+      data: data,
       expires: null,
     });
+  }
+
+  async function loadData(datakey, dataId) {
+    //returns data
+
+    let data;
+
+    storage.load({
+      key: datakey,
+      id: dataId,
+    });
+
+    data = await storage.getAllDataForKey(datakey);
+
+    return data;
+  }
+
+  async function setInitialDateAwait() {
+    //Es necesaria esta funcion para esperar al resultado de loadData
+    let dateStoraged = await loadData("initialDateStorage", "1");
+    setInitialDate(dateStoraged);
   }
 }
