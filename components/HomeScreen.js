@@ -6,14 +6,25 @@ import styles from "./Styles";
 
 import badges from "./badgesArray.js";
 import { saveData, loadData } from "./Utilities.js";
+import audio from "./audio";
 
 export default function HomeScreen({ name = "Clown" }) {
   const [initialDate, setInitialDate] = useState(null);
   const [badge, setBadge] = useState(badges[0]);
 
+  const [sound, setSound] = React.useState();
+
+
   useEffect(() => {
     setInitialDateAwait();
   }, []);
+  useEffect(() => {
+    return sound
+      ? () => {
+          console.log('Unloading Sound');
+          sound.unloadAsync(); }
+      : undefined;
+  }, [sound]);
 
   return (
     <View style={styles.container}>
@@ -59,7 +70,7 @@ export default function HomeScreen({ name = "Clown" }) {
   }
   function reset() {
     const date = new Date();
-
+    audio()
     setInitialDate(date);
     saveData(date.getTime(), "initialDateStorage", "1");
   }
