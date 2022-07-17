@@ -148,9 +148,12 @@ const getProfileData = async () => {
     color: "purple",
     icon: LongestIcon,
   };
+
+  let timesSinned = await loadData("timesSinned", "3");
+  timesSinned ? (timesSinned = timesSinned[0]) : (timesSinned = null);
   data[3] = {
     title: "Times sinned:",
-    description: "4",
+    description: timesSinned ? timesSinned + " times" : "No diet registered ",
     color: "green",
     icon: NumberIcon,
   };

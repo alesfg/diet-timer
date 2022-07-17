@@ -83,7 +83,6 @@ export default function HomeScreen({ name = "Clown" }) {
 
   async function setLongestDietTime() {
     let dateStoragedDate = await loadData("initialDateStorage", "1");
-    console.log(dateStoragedDate + "  --  dataStoraged");
 
     //calculamos la diferencia de tiempo NUEVA
     let newDiff = new Date().getTime() - dateStoragedDate;
@@ -97,8 +96,20 @@ export default function HomeScreen({ name = "Clown" }) {
     }
   }
 
+  async function plusTimeSinned() {
+    let timesSinnedOld = await loadData("timesSinned", "3");
+    let timesSinnedOldInt = 0;
+    if (timesSinnedOld != null) {
+      timesSinnedOldInt = parseInt(timesSinnedOld);
+    } //Si no existe el TimeSinnedOld (todavia no se ha registrado ninguna vez), entonces se queda timesSinnedOLdInt a 0)
+
+    let timeSinnedNew = timesSinnedOldInt + 1;
+    saveData(timeSinnedNew, "timesSinned", "3");
+  }
+
   async function useStorage(date) {
     await setLongestDietTime();
+    plusTimeSinned();
     saveData(date.getTime(), "initialDateStorage", "1");
   }
 }
