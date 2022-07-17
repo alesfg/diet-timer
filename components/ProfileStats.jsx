@@ -1,6 +1,5 @@
-import React, { Fragment, useState, useRef } from "react";
+import React, { Fragment, useState, useRef, useEffect } from "react";
 import { View, Image, Text } from "react-native";
-import { FlatList } from "react-native-gesture-handler";
 import Animated from "react-native-reanimated";
 import FirstDateIcon from "../assets/ProfileStats/FirstDateIcon.png";
 import LastDateIcon from "../assets/ProfileStats/LastDateIcon.png";
@@ -9,12 +8,21 @@ import LongestIcon from "../assets/ProfileStats/LongestIcon.png";
 import NumberIcon from "../assets/ProfileStats/NumberIcon.png";
 import BadgeIcon from "../assets/ProfileStats/BadgeIcon.png";
 import MaximumBadgeIcon from "../assets/ProfileStats/MaximumBadgeIcon.png";
+import { loadData } from "./Utilities.js";
 
 const ProfileStats = () => {
-  const [statsData, setStatsData] = useState(getProfileData());
+  const [statsData, setStatsData] = useState();
   const STATSIZE = 160;
   const SPACING = 35;
   const scrollY = React.useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    (async () => {
+      const DATA = await getProfileData();
+      setStatsData(DATA);
+    })();
+  }, []);
+
   const ITEMSIZE = STATSIZE * 0.5 + 10;
   return (
     <Animated.FlatList
@@ -31,6 +39,7 @@ const ProfileStats = () => {
       showsVerticalScrollIndicator={false}
       numColumns={2}
       data={statsData}
+      keyExtractor={(item) => item.title}
       renderItem={({ item: stats, index }) => {
         const indexFixed = index % 2 === 0 ? index : index - 1;
 
@@ -104,18 +113,19 @@ const ProfileStats = () => {
   );
 };
 
-const getProfileData = () => {
+const getProfileData = async () => {
   let data = [{ title: "title", description: "description" }]; //Escribimos con plantilla vacia
-
+  let firstDate = await loadData("initialDateStorage", "1");
+  firstDate ? (firstDate = firstDate[0]) : (firstDate = null);
   data[0] = {
     title: "First diet date:",
-    description: "12/03/2002",
+    description: firstDate ? new Date(firstDate).toDateString() : "- - -",
     color: "red",
     icon: FirstDateIcon,
   };
   data[1] = {
     title: "Last diet date:",
-    description: "HOY",
+    description: "Today",
     color: "blue",
     icon: LastDateIcon,
   };
