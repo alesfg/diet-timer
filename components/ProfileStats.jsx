@@ -9,6 +9,7 @@ import NumberIcon from "../assets/ProfileStats/NumberIcon.png";
 import BadgeIcon from "../assets/ProfileStats/BadgeIcon.png";
 import MaximumBadgeIcon from "../assets/ProfileStats/MaximumBadgeIcon.png";
 import { loadData } from "./Utilities.js";
+import badges from "./badgesArray.js";
 
 const ProfileStats = () => {
   const [statsData, setStatsData] = useState();
@@ -157,9 +158,21 @@ const getProfileData = async () => {
     color: "green",
     icon: NumberIcon,
   };
+
+  let badgeActual = 1;
+  //recorremos cada badge, y la primera que encontramos con un valor tiempo mayor al que tenemos nos salimos
+  for (let i = 0; i < badges.length; i++) {
+    if (badges[i].time > longestDiet) {
+      badgeActual = i;
+      break;
+    } else if (i == badges.length - 1) {
+      badgeActual = i + 1;
+    }
+  }
+  badgeActual = badgeActual - 1;
   data[4] = {
     title: "Maximum badge level:",
-    description: "PEPE",
+    description: badges[badgeActual].name,
     color: "orange",
     icon: BadgeIcon,
   };
