@@ -115,23 +115,36 @@ const ProfileStats = () => {
 
 const getProfileData = async () => {
   let data = [{ title: "title", description: "description" }]; //Escribimos con plantilla vacia
+
   let firstDate = await loadData("initialDateStorage", "1");
   firstDate ? (firstDate = firstDate[0]) : (firstDate = null);
   data[0] = {
     title: "First diet date:",
-    description: firstDate ? new Date(firstDate).toDateString() : "- - -",
+    description: firstDate
+      ? new Date(firstDate).toDateString()
+      : "No diet registered",
     color: "red",
     icon: FirstDateIcon,
   };
+
   data[1] = {
     title: "Last diet date:",
     description: "Today",
     color: "blue",
     icon: LastDateIcon,
   };
+
+  let longestDiet = await loadData("longestDietTime", "2");
+  longestDiet ? (longestDiet = longestDiet[0]) : (longestDiet = null);
+  let longestDietText = "ERROR";
+  if (longestDiet != null) {
+    longestDietText = Math.floor(longestDiet / 86400000) + " Days";
+  } else {
+    longestDietText = "No diet registered";
+  }
   data[2] = {
     title: "Longest diet:",
-    description: "3 Days!",
+    description: longestDietText,
     color: "purple",
     icon: LongestIcon,
   };

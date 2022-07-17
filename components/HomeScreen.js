@@ -14,15 +14,15 @@ export default function HomeScreen({ name = "Clown" }) {
 
   const [sound, setSound] = React.useState();
 
-
   useEffect(() => {
     setInitialDateAwait();
   }, []);
   useEffect(() => {
     return sound
       ? () => {
-          console.log('Unloading Sound');
-          sound.unloadAsync(); }
+          console.log("Unloading Sound");
+          sound.unloadAsync();
+        }
       : undefined;
   }, [sound]);
 
@@ -70,14 +70,35 @@ export default function HomeScreen({ name = "Clown" }) {
   }
   function reset() {
     const date = new Date();
-    audio()
+    audio();
     setInitialDate(date);
-    saveData(date.getTime(), "initialDateStorage", "1");
+    useStorage(date);
   }
 
   async function setInitialDateAwait() {
     //Es necesaria esta funcion para esperar al resultado de loadData
     let dateStoraged = await loadData("initialDateStorage", "1");
     setInitialDate(dateStoraged);
+  }
+
+  async function setLongestDietTime() {
+    let dateStoragedDate = await loadData("initialDateStorage", "1");
+    console.log(dateStoragedDate + "  --  dataStoraged");
+
+    //calculamos la diferencia de tiempo NUEVA
+    let newDiff = new Date().getTime() - dateStoragedDate;
+
+    //calculamos la diferencia de tiempo ya registrada (antiguo record)
+    let oldDiff = await loadData("longestDietTime", "2");
+
+    //si es mayor la nueva diferencia de tiempo (o no existe antigua) se guarda "pisando" la antigua diferencia de tiempo
+    if (oldDiff == null || oldDiff < newDiff) {
+      saveData(newDiff, "longestDietTime", "2");
+    }
+  }
+
+  async function useStorage(date) {
+    await setLongestDietTime();
+    saveData(date.getTime(), "initialDateStorage", "1");
   }
 }
