@@ -81,7 +81,7 @@ export default function HomeScreen({ name = "Clown" }) {
     setInitialDate(dateStoraged);
   }
 
-  async function setLongestDietTime() {
+  async function setLongestDietTimeAndDate() {
     let dateStoragedDate = await loadData("initialDateStorage", "1");
 
     //calculamos la diferencia de tiempo NUEVA
@@ -93,6 +93,7 @@ export default function HomeScreen({ name = "Clown" }) {
     //si es mayor la nueva diferencia de tiempo (o no existe antigua) se guarda "pisando" la antigua diferencia de tiempo
     if (oldDiff == null || oldDiff < newDiff) {
       saveData(newDiff, "longestDietTime", "2");
+      saveData(new Date().getTime(), "longestDietDate", "4");
     }
   }
 
@@ -108,7 +109,7 @@ export default function HomeScreen({ name = "Clown" }) {
   }
 
   async function useStorage(date) {
-    await setLongestDietTime();
+    await setLongestDietTimeAndDate();
     plusTimeSinned();
     saveData(date.getTime(), "initialDateStorage", "1");
   }

@@ -177,9 +177,15 @@ const getProfileData = async () => {
     icon: BadgeIcon,
   };
 
+  let longestDietDate = await loadData("longestDietDate", "4");
+  longestDietDate
+    ? (longestDietDate = longestDietDate[0])
+    : (longestDietDate = null);
   data[5] = {
-    title: "Maximum badge date:",
-    description: "24/05/1999",
+    title: "Longest diet date:",
+    description: longestDietDate
+      ? new Date(longestDietDate).toDateString()
+      : "No diet registered ",
     color: "black",
     icon: MaximumBadgeIcon,
   };
