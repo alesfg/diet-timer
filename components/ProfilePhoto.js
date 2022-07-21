@@ -1,12 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Image, Text, StyleSheet, TouchableOpacity } from "react-native";
 import average from "../assets/average.jpg";
 import editPencil from "../assets/EditPencil.png";
 import * as ImagePicker from "expo-image-picker";
 import themes from "./themes";
+import { loadData, saveData } from "./Utilities.js";
 
 function ProfilePhoto() {
   const [selectedImage, setSelectedImage] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      const imageProfile = await loadData("ProfileImage", "5");
+      if (imageProfile != null && imageProfile != undefined) {
+        setSelectedImage(imageProfile[0]);
+      }
+    })();
+  }, []);
 
   return (
     <View style={{ flexDirection: "row", marginTop: 10 }}>
@@ -64,6 +74,7 @@ let openImagePickerAsync = async (setSelectedImageF) => {
     if (PickerResult.cancelled === true) {
     } else {
       setSelectedImageF(PickerResult.uri);
+      saveData(PickerResult.uri, "ProfileImage", "5");
     }
   }
 };
