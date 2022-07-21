@@ -42,7 +42,7 @@ export default function HomeScreen({ name = "Clown" }) {
       </View>
       <View style={styles.containerTimerButton}>
         <Timer initialDate={initialDate} actualizarBadge={actualizarBadge} />
-        <TouchableOpacity style={styles.button} onPress={reset}>
+        <TouchableOpacity style={styles.primaryButton} onPress={reset}>
           {initialDate ? (
             <Text style={styles.textButton}>He pecado 🍖</Text>
           ) : (

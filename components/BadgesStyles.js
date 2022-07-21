@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 import themes from "./themes";
 
-const styles = StyleSheet.create({
+const badgesStyles = StyleSheet.create({
   tittle: {
     paddingBottom: 22,
     fontSize: 60,
@@ -101,4 +101,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default styles;
+export default badgesStyles;
