@@ -12,7 +12,7 @@ function ProfilePhoto() {
   useEffect(() => {
     (async () => {
       const imageProfile = await loadData("ProfileImage", "5");
-      if (imageProfile != null && imageProfile != undefined) {
+      if (imageProfile[0] != null && imageProfile[0] != undefined) {
         setSelectedImage(imageProfile[0]);
       }
     })();

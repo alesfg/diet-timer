@@ -78,20 +78,23 @@ export default function HomeScreen({ name = "Clown" }) {
   async function setInitialDateAwait() {
     //Es necesaria esta funcion para esperar al resultado de loadData
     let dateStoraged = await loadData("initialDateStorage", "1");
-    setInitialDate(dateStoraged);
+    setInitialDate(dateStoraged[0] ? dateStoraged : null);
   }
 
   async function setLongestDietTimeAndDate() {
     let dateStoragedDate = await loadData("initialDateStorage", "1");
 
+    let newDiff = 0;
     //calculamos la diferencia de tiempo NUEVA
-    let newDiff = new Date().getTime() - dateStoragedDate;
+    if (dateStoragedDate[0] != null) {
+      new Date().getTime() - dateStoragedDate;
+    }
 
     //calculamos la diferencia de tiempo ya registrada (antiguo record)
     let oldDiff = await loadData("longestDietTime", "2");
 
     //si es mayor la nueva diferencia de tiempo (o no existe antigua) se guarda "pisando" la antigua diferencia de tiempo
-    if (oldDiff == null || oldDiff < newDiff) {
+    if (oldDiff[0] == null || oldDiff[0] < newDiff) {
       saveData(newDiff, "longestDietTime", "2");
       saveData(new Date().getTime(), "longestDietDate", "4");
     }
@@ -100,7 +103,7 @@ export default function HomeScreen({ name = "Clown" }) {
   async function plusTimeSinned() {
     let timesSinnedOld = await loadData("timesSinned", "3");
     let timesSinnedOldInt = 0;
-    if (timesSinnedOld != null) {
+    if (timesSinnedOld[0] != null) {
       timesSinnedOldInt = parseInt(timesSinnedOld);
     } //Si no existe el TimeSinnedOld (todavia no se ha registrado ninguna vez), entonces se queda timesSinnedOLdInt a 0)
 
