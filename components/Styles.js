@@ -23,7 +23,8 @@ const styles = StyleSheet.create({
     paddingTop: 40,
   },
   containerTimerButton: {
-    paddingBottom: 100,
+    marginTop: 10,
+    paddingBottom: 50,
   },
   textButton: {
     color: themes.colors.white,

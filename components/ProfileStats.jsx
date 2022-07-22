@@ -30,7 +30,7 @@ const ProfileStats = () => {
       //style={{ backgroundColor: "gray" }}
       contentContainerStyle={{
         padding: SPACING,
-        paddingBottom: (ITEMSIZE + SPACING) * 4,
+        paddingBottom: ITEMSIZE * 4.2,
         paddingTop: 60,
       }}
       onScroll={Animated.event(
