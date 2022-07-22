@@ -86,8 +86,9 @@ export default function HomeScreen({ name = "Clown" }) {
 
     let newDiff = 0;
     //calculamos la diferencia de tiempo NUEVA
+
     if (dateStoragedDate[0] != null) {
-      new Date().getTime() - dateStoragedDate;
+      newDiff = new Date().getTime() - dateStoragedDate;
     }
 
     //calculamos la diferencia de tiempo ya registrada (antiguo record)

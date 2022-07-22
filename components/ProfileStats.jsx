@@ -172,7 +172,7 @@ const getProfileData = async () => {
   badgeActual = badgeActual - 1;
   data[4] = {
     title: "Maximum badge level:",
-    description: badges[badgeActual].name,
+    description: firstDate ? badges[badgeActual].name : "No diet registered",
     color: "orange",
     icon: BadgeIcon,
   };
