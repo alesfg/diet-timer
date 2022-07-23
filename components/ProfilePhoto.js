@@ -19,7 +19,15 @@ function ProfilePhoto() {
   }, []);
 
   return (
-    <View style={{ flexDirection: "row", marginTop: 10 }}>
+    <View
+      style={{
+        flexDirection: "row",
+        height: "40%",
+        justifyContent: "center",
+        alignItems: "center",
+        marginBottom: -60 - 1000,
+      }}
+    >
       <Image
         source={{
           uri:
@@ -43,8 +51,8 @@ function ProfilePhoto() {
         style={{
           //   backgroundColor: "red",
           //   marginLeft: 10,
-          marginBottom: 0,
-          padding: 5,
+          marginBottom: "40%",
+
           marginLeft: 0,
         }}
       >

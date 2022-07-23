@@ -16,7 +16,9 @@ const ProfileName = ({ nombre }) => {
       style={{
         justifyContent: "center",
         alignItems: "center",
-        margin: 30,
+        margin: "7%",
+        marginTop: "10%",
+        height: "5%",
       }}
     >
       <Text style={styles.badgeLabel}>{name ? name : ""}</Text>

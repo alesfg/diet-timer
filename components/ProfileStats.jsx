@@ -14,7 +14,7 @@ import badges from "./badgesArray.js";
 const ProfileStats = () => {
   const [statsData, setStatsData] = useState();
   const STATSIZE = 160;
-  const SPACING = 35;
+  const SPACING = -20;
   const scrollY = React.useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
@@ -29,9 +29,8 @@ const ProfileStats = () => {
     <Animated.FlatList
       //style={{ backgroundColor: "gray" }}
       contentContainerStyle={{
-        padding: SPACING,
-        paddingBottom: ITEMSIZE * 4.2,
-        paddingTop: 60,
+        paddingBottom: "40%",
+        paddingTop: 60 + 1000,
       }}
       onScroll={Animated.event(
         [{ nativeEvent: { contentOffset: { y: scrollY } } }],
@@ -44,7 +43,11 @@ const ProfileStats = () => {
       renderItem={({ item: stats, index }) => {
         const indexFixed = index % 2 === 0 ? index : index - 1;
 
-        const inputRange = [-10000, indexFixed * (ITEMSIZE - 8), 10000];
+        const inputRange = [
+          -10000,
+          indexFixed * (ITEMSIZE + SPACING / 2 - 8),
+          10000,
+        ];
 
         const scale = scrollY.interpolate({
           inputRange,
@@ -52,13 +55,15 @@ const ProfileStats = () => {
         });
         const opacity = scrollY.interpolate({
           inputRange,
-          outputRange: [-50, 1, -120],
+          outputRange: [-30, 1, -215],
         });
         return (
           <Animated.View
             key={stats.title}
             style={{
               margin: 2,
+              marginTop: 0,
+              marginBottom: SPACING,
               backgroundColor: themes.colors.primaryColor,
               borderRadius: 40,
               height: STATSIZE,
