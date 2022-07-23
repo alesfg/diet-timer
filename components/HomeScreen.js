@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Image, Text, TouchableOpacity } from "react-native";
+import { View, Image, Text, TouchableOpacity, Alert } from "react-native";
 import { useState, useEffect } from "react";
 import Timer from "./Timer";
 import styles from "./Styles";
@@ -69,10 +69,8 @@ export default function HomeScreen({ name = "Clown" }) {
     setBadge(badges[badgeActual]);
   }
   function reset() {
-    const date = new Date();
     audio();
-    setInitialDate(date);
-    useStorage(date);
+    showConfirmDialog();
   }
 
   async function setInitialDateAwait() {
@@ -116,5 +114,32 @@ export default function HomeScreen({ name = "Clown" }) {
     await setLongestDietTimeAndDate();
     plusTimeSinned();
     saveData(date.getTime(), "initialDateStorage", "1");
+  }
+
+  function showConfirmDialog() {
+    return Alert.alert(
+      "Are your sure?",
+      "Are you sure you want to RESET the diet?",
+      [
+        // The "Yes" button
+        {
+          text: "Yes",
+          onPress: () => {
+            resetConfirmed();
+          },
+        },
+        // The "No" button
+        // Does nothing but dismiss the dialog when tapped
+        {
+          text: "No",
+        },
+      ]
+    );
+  }
+
+  function resetConfirmed() {
+    const date = new Date();
+    setInitialDate(date);
+    useStorage(date);
   }
 }
